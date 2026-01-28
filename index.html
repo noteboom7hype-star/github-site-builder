@@ -5,56 +5,81 @@
   <title>Construtor de Site</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       height: 100vh;
       margin: 0;
+      background: #e9ecef;
     }
     #toolbar {
-      width: 200px;
-      background: #f4f4f4;
-      padding: 10px;
-      border-right: 1px solid #ccc;
+      width: 220px;
+      background: #343a40;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #toolbar h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .tool-btn {
+      padding: 12px;
+      background: #007bff;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .tool-btn:hover {
+      background: #0056b3;
+      box-shadow: 0 0 10px #007bff;
     }
     #canvas {
       flex: 1;
-      padding: 20px;
       background: #fff;
+      margin: 20px;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       overflow-y: auto;
     }
-    .btn {
-      display: block;
-      margin: 10px 0;
-      padding: 10px;
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: box-shadow 0.3s ease;
-    }
-    .btn:hover {
-      box-shadow: 0 0 10px #007BFF;
-    }
     .element {
-      margin: 10px 0;
+      margin: 15px 0;
     }
-    img {
-      max-width: 100%;
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
     }
   </style>
 </head>
 <body>
   <div id="toolbar">
-    <button class="btn" onclick="addText()">Adicionar Texto</button>
-    <button class="btn" onclick="addButton()">Adicionar Botão</button>
-    <button class="btn" onclick="addImage()">Adicionar Imagem</button>
+    <h2>Ferramentas</h2>
+    <button class="tool-btn" onclick="addTitle()">Adicionar Título</button>
+    <button class="tool-btn" onclick="addText()">Adicionar Texto</button>
+    <button class="tool-btn" onclick="addButton()">Adicionar Botão</button>
+    <button class="tool-btn" onclick="addImage()">Adicionar Imagem</button>
+    <button class="tool-btn" onclick="addVideo()">Adicionar Vídeo</button>
   </div>
   <div id="canvas">
     <h2>Seu site aqui 👇</h2>
   </div>
 
   <script>
+    function addTitle() {
+      const title = prompt("Digite o título:");
+      if (title) {
+        const h1 = document.createElement("h1");
+        h1.className = "element";
+        h1.textContent = title;
+        document.getElementById("canvas").appendChild(h1);
+      }
+    }
+
     function addText() {
       const text = prompt("Digite o texto:");
       if (text) {
@@ -69,7 +94,7 @@
       const label = prompt("Texto do botão:");
       if (label) {
         const btn = document.createElement("button");
-        btn.className = "btn element";
+        btn.className = "tool-btn element";
         btn.textContent = label;
         document.getElementById("canvas").appendChild(btn);
       }
@@ -81,7 +106,18 @@
         const img = document.createElement("img");
         img.className = "element";
         img.src = url;
+        img.style.maxWidth = "100%";
         document.getElementById("canvas").appendChild(img);
+      }
+    }
+
+    function addVideo() {
+      const url = prompt("URL do vídeo (YouTube):");
+      if (url) {
+        const iframe = document.createElement("iframe");
+        iframe.className = "element";
+        iframe.src = url.replace("watch?v=", "embed/");
+        document.getElementById("canvas").appendChild(iframe);
       }
     }
   </script>
