@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Construtor de Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+    #toolbar {
+      width: 200px;
+      background: #f4f4f4;
+      padding: 10px;
+      border-right: 1px solid #ccc;
+    }
+    #canvas {
+      flex: 1;
+      padding: 20px;
+      background: #fff;
+      overflow-y: auto;
+    }
+    .btn {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      box-shadow: 0 0 10px #007BFF;
+    }
+    .element {
+      margin: 10px 0;
+    }
+    img {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <button class="btn" onclick="addText()">Adicionar Texto</button>
+    <button class="btn" onclick="addButton()">Adicionar Botão</button>
+    <button class="btn" onclick="addImage()">Adicionar Imagem</button>
+  </div>
+  <div id="canvas">
+    <h2>Seu site aqui 👇</h2>
+  </div>
+
+  <script>
+    function addText() {
+      const text = prompt("Digite o texto:");
+      if (text) {
+        const p = document.createElement("p");
+        p.className = "element";
+        p.textContent = text;
+        document.getElementById("canvas").appendChild(p);
+      }
+    }
+
+    function addButton() {
+      const label = prompt("Texto do botão:");
+      if (label) {
+        const btn = document.createElement("button");
+        btn.className = "btn element";
+        btn.textContent = label;
+        document.getElementById("canvas").appendChild(btn);
+      }
+    }
+
+    function addImage() {
+      const url = prompt("URL da imagem:");
+      if (url) {
+        const img = document.createElement("img");
+        img.className = "element";
+        img.src = url;
+        document.getElementById("canvas").appendChild(img);
+      }
+    }
+  </script>
+</body>
+</html>
